@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('./partials/head') %>
+  
+   <title>Blog Page</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="blog-header">
+        <img src="<%= blog.createdBy.profileImageURL %>" alt="<%= blog.createdBy.fullname %> Profile Picture" class="profile-pic" >
+        <div class="author-info">
+            <h5><%= blog.createdBy.fullname %></h5>
+        </div>
+    </div>
+
+    <div class="blog-content container">
+        <h1><%= blog.title %></h1>
+        <img src="<%= blog.coverImageURL %>" alt="Blog Cover" class="cover-image">
+        <pre class="blog-body"><%= blog.body %></pre>
+    </div>
+
+    <div class="comments-section container">
+        <% if (locals.user) { %>
+        <form action="/blog/comment/<%= blog._id %>" method="post" class="comment-form">
+            <input 
+                type="text"
+                name="content" 
+                class="form-control"
+                placeholder="Enter your comment"
+                 required >
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+        </form>
+        <% } %>
+
+        <h2>Comments (<%= comments.length %>)</h2>
+        <div class="comments-list">
+            <% comments.forEach(comment => { %>
+            <div class="comment-item">
+                <img src="<%= comment.createdBy.profileImageURL %>" alt="Profile Picture" class="comment-profile-pic">
+                <div class="comment-content">
+                    <h5><%= comment.createdBy.fullname %></h5>
+                    <p><%= comment.content %></p>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>
+
+
+<style>
+    /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Blog Header */
+.blog-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+.profile-pic {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid #007bff;
+}
+
+.author-info h5 {
+    margin: 0;
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+/* Blog Content */
+.blog-content {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.blog-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cover-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.blog-body {
+    background-color: #f1f3f5;
+    padding: 1rem;
+    border-radius: 8px;
+    white-space: pre-wrap;
+}
+
+/* Comments Section */
+.comments-section {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.comment-form input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.comment-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comment-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Comments List */
+.comments-list {
+    margin-top: 1rem;
+}
+
+.comment-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1.5rem;
+}
+
+.comment-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid #6c757d;
+}
+
+.comment-content h5 {
+    margin: 0;
+    color: #6c757d;
+}
+
+.comment-content p {
+    margin: 0.5rem 0 0 0;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .blog-header, .blog-content, .comments-section {
+        padding: 1rem;
+    }
+
+    .comment-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comment-profile-pic {
+        margin-bottom: 0.5rem;
+    }
+}
+
+</style>
+
+

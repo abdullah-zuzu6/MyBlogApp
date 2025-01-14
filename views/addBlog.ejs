@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('./partials/head') %>
+   <title>Add New Blog</title>
+   <style>
+      /* General Styles */
+      body {
+         font-family: 'Poppins', sans-serif;
+         background: linear-gradient(to bottom, #f0f0f5, #d9d9e3);
+         margin: 0;
+         padding: 0;
+      }
+
+      /* Container */
+      .container {
+         max-width: 700px;
+         margin: 2rem auto;
+         background: #ffffff;
+         padding: 2rem 1.5rem;
+         border-radius: 15px;
+         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+         border: 2px solid #f0f0f0;
+      }
+
+      /* Form Title */
+      .form-title {
+         text-align: center;
+         font-size: 1.8rem;
+         color: #4a4a72;
+         margin-bottom: 1.5rem;
+         font-weight: bold;
+         text-transform: uppercase;
+      }
+
+      /* Form Inputs */
+      .form-label {
+         font-size: 1rem;
+         font-weight: bold;
+         color: #333;
+         margin-bottom: 0.5rem;
+         display: block;
+      }
+
+      .form-control {
+         width: 100%;
+         padding: 0.8rem;
+         margin-bottom: 1.2rem;
+         border: 1px solid #ccc;
+         border-radius: 8px;
+         font-size: 1rem;
+         transition: 0.3s ease-in-out;
+         background: #f9f9f9;
+      }
+
+      .form-control:focus {
+         outline: none;
+         border-color: #5e72e4;
+         box-shadow: 0 0 8px rgba(94, 114, 228, 0.5);
+         background: #ffffff;
+      }
+
+      textarea.form-control {
+         resize: none;
+      }
+
+      /* Button Styles */
+      .btn {
+         display: block;
+         width: 100%;
+         padding: 0.8rem;
+         font-size: 1rem;
+         color: #ffffff;
+         background-color: #5e72e4;
+         border: none;
+         border-radius: 8px;
+         font-weight: bold;
+         cursor: pointer;
+         transition: 0.3s ease-in-out;
+         text-transform: uppercase;
+      }
+
+      .btn:hover {
+         background-color: #4a5bdc;
+         box-shadow: 0 4px 10px rgba(94, 114, 228, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+         .container {
+            margin-right: 13px;
+            padding: 1.5rem;
+            width: 350px;
+         }
+
+         .form-title {
+            font-size: 1.5rem;
+         }
+
+         .btn {
+            font-size: 0.9rem;
+            padding: 0.7rem;
+         }
+      }
+   </style>
+</head>
+<body>
+   <%- include('./partials/nav.ejs') %>
+
+   <div class="container">
+      <h2 class="form-title">Add New Blog</h2>
+      <form action="/blog" method="post" enctype="multipart/form-data">
+         <label for="coverImage" class="form-label">Cover Image</label>
+         <input type="file" name="coverImage" class="form-control" id="coverImage" aria-describedby="coverImage" required>
+
+         <label for="title" class="form-label">Title</label>
+         <input type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Enter blog title" required>
+
+         <label for="body" class="form-label">Body</label>
+         <textarea name="body" class="form-control" id="body" rows="5" placeholder="Write about your blog..." required></textarea>
+
+         <button type="submit" class="btn">Submit</button>
+      </form>
+   </div>
+
+   <%- include('./partials/script') %>
+</body>
+</html>
