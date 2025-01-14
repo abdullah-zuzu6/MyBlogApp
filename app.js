@@ -1,57 +1,3 @@
-//  require('dotenv').config();
-
-// const express = require('express')
-// const cookieParser = require('cookie-parser')
-// const mongoose = require('mongoose');
-// const Blog = require('./models/blog')
-
-// const userRoute = require('./routes/user')
-// const blogRoute = require('./routes/blog')
-
-// const path = require('path');
-// const { checkForAuthenticationCookie } = require('./middlewares/authentication');
-
-// const app = express()
-
-// const PORT = process.env.PORT|| 8000 ;
-
-
-
-// // mongoose.connect('mongodb://localhost:27017/BlogAppData')
-// mongoose.connect(process.env.MONGO_URL)
-// .then(() => console.log('Database connected successfully'))
-//   .catch((err) => console.error('Database connection error:', err));
-
-//    mongoose.set('debug', true);
-
-// app.set('view engine','ejs')
-// app.set("views",path.resolve("./views"))
-
-// //mildeWare 
-// app.use(express.json())
-// app.use(express.urlencoded({extended:false}))
-// app.use(cookieParser())
-// app.use(checkForAuthenticationCookie('token'))
-// app.use(express.static(path.resolve('./public')));
-
-
-// app.get('/',async (req,res)=>{
-//    const  allBlogs = await Blog.find({})
-//     res.render("home",{
-//         user: req.user,
-//         blogs:allBlogs,
-//     })
-// })
-
-
-// app.use('/user',userRoute);
-// app.use('/blog',blogRoute );
-
-// app.listen(PORT,()=>{
-//     console.log(`server started at ${PORT}`);
-// })
-
-
 
 
 require('dotenv').config(); // Load environment variables
@@ -82,8 +28,6 @@ mongoose
     console.error('Database connection error:', err);
     process.exit(1); // Exit the application if the database connection fails
   });
-
-mongoose.set('debug', true); // Log database queries for debugging
 
 // Set up view engine
 app.set('view engine', 'ejs');
